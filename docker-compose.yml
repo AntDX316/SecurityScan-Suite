@@ -1,6 +1,11 @@
 services:
   # Clair vulnerability database
   clair-db:
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: "3"
     container_name: clair-postgres-db
     image: postgres:13
     environment:
@@ -22,6 +27,11 @@ services:
   # Note: Official Clair images may not be available
   # This is an alternative implementation
   clair:
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: "3"
     container_name: clair-vulnerability-scanner
     image: arminc/clair-local-scan:latest
     depends_on:
